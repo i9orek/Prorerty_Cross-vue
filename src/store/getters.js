@@ -1,7 +1,12 @@
+/* eslint-disable */
+
 import * as types from './types';
 
 export default {
-  [types.RESPONCE_DATA]: state => {
-    return state.responceData;
+  [types.SEARCH_LISTS]: state => {
+    return state.searchLists;
+  },
+  [types.LOCATION_BELOW]: state => {
+    return state.locationBelow;
   },
 }
