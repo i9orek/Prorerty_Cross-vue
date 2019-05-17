@@ -1,7 +1,8 @@
 <template>
     <ul class="search-list">
-        <li v-for="(el,index) in getLists" :key="index">
-            <a>search #{{index+1}} ({{el.total_pages}})</a>
+        Please select the location below:
+        <li v-for="(el,index) in getLocLists" :key="index">
+            <a>location #{{index+1}}</a>
         </li>
     </ul>    
 </template>
@@ -12,7 +13,7 @@ import * as types from '../store/types.js';
 export default {
     computed:{
         ...mapGetters({
-            getLists:types.SEARCH_LISTS,
+            getLocLists:types.LOCATION_BELOW,
         })
     }
 }
@@ -27,4 +28,3 @@ export default {
         padding: 10px 0;
     }
 </style>
-

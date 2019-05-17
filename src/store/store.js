@@ -12,6 +12,8 @@ export default new Vuex.Store({
   state: {
     searchLists: [],
     locationBelow:[],
+    currentComponent: '',
+    currentRequestError:'',
   },
   getters,
   mutations,
