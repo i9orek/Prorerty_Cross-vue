@@ -17,9 +17,11 @@ export default {
         if (code === '200' || code === '202') {
           commit(types.MUTATE_UPDATE_LOCATION_BELOW, response);
           commit(types.CURRENT_COMPONENT_NAME, 'location-list');
+          console.log(response);
         } else if (code === '100' || code === '101' || code === '110') {
           commit(types.MUTATE_UPDATE_SEARCH_LISTS, response);
-          commit(types.CURRENT_COMPONENT_NAME, 'search-list');
+          commit(types.CURRENT_COMPONENT_NAME, 'search-lists');
+          console.log(typeof response);
         } else {
           commit(types.CURRENT_COMPONENT_NAME, 'error-page');
           commit(types.CURRENT_REQUEST_ERROR, response.errors);
@@ -42,4 +44,5 @@ export default {
         commit(types.CURRENT_COMPONENT_NAME, 'search-list');
       })
   },
+
 }

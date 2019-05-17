@@ -15,3 +15,4 @@ export const SEARCH_BY_GPS = 'searchByGPS';
 
 export const UPDATE_SEARCH_LISTS = 'updateSearchLists';
 export const UPDATE_SEARCH_BY_GPS = 'updateSearchByGPS';
+export const UPDATE_CURRENT_COMPONENT_NAME = 'updateCurCompName'

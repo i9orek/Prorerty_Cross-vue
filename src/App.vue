@@ -10,9 +10,10 @@
 <script>
 import { mapState } from "vuex";
 import Search from "./components/Search.vue";
-import SearchList from "./components/SearchList.vue";
+import SearchLists from "./components/SearchLists";
 import LocationList from "./components/LocationList.vue";
 import SearchError from "./components/SearchError.vue";
+import SearchList from './components/SearchList';
 
 export default {
   computed: {
@@ -22,9 +23,10 @@ export default {
   },
   components: {
     "search-page": Search,
-    "search-list": SearchList,
+    "search-lists": SearchLists,
     "location-list": LocationList,
-    "error-page": SearchError
+    "error-page": SearchError,
+    "search-list": SearchList,
   }
 };
 </script>
