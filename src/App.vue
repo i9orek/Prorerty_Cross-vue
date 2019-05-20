@@ -1,35 +1,8 @@
 <template>
   <div id="app" class="container">
-      <search-page></search-page>
-    <keep-alive>
-      <component :is="currentComponent"></component>
-    </keep-alive>
+    <router-view></router-view>
   </div>
 </template>
-
-<script>
-import { mapState } from "vuex";
-import Search from "./components/Search.vue";
-import SearchLists from "./components/SearchLists";
-import LocationList from "./components/LocationList.vue";
-import SearchError from "./components/SearchError.vue";
-import SearchList from './components/SearchList';
-
-export default {
-  computed: {
-    ...mapState({
-      currentComponent: state => state.currentComponent
-    })
-  },
-  components: {
-    "search-page": Search,
-    "search-lists": SearchLists,
-    "location-list": LocationList,
-    "error-page": SearchError,
-    "search-list": SearchList,
-  }
-};
-</script>
 
 <style>
 * {

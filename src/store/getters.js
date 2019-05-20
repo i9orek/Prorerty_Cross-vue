@@ -9,4 +9,7 @@ export default {
   [types.LOCATION_BELOW]: state => {
     return state.locationBelow;
   },
+  [types.CURRENT]:state=>{
+    return state.currentComponent;
+  }
 }
