@@ -1,7 +1,13 @@
 /* eslint-disable */
 
 import * as types from './types';
-import * as constants from '../constants/constants';
+import {
+  AMBIGUOUS_LOCATION,
+  MISSPELLED_LOCATION,
+  LISTINGS_OF_ONE_UNAMBIGUOUS_LOCATION,
+  LISTINGS_OF_BEST_AMBIGUOUS_LOCATION,
+  LISTINGS_LARGE_LOCATION
+} from '../constants/constants';
 import axios from 'axios-jsonp-pro';
 
 const setIdToList = function (item) {
