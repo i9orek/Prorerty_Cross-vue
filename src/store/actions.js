@@ -3,7 +3,7 @@
 import * as types from './types';
 import axios from 'axios-jsonp-pro';
 
-function setIdToList(item){
+const setIdToList = function (item) {
   const id = Math.floor(Math.random()*10000);
   return item.listId = id;
 }
@@ -18,14 +18,13 @@ export default {
       .then(({response}) => {
         const list = setIdToList(response);
         const code = response.application_response_code;
-        if (code === '200' || code === '202') {
+        if (code === types.AMBIGUOUS_LOCATION || code === types.MISSPELLED_LOCATION) {
           commit(types.MUTATE_UPDATE_LOCATION_BELOW, response);
           commit(types.CURRENT_COMPONENT_NAME, 'location-list');
-        } else if (code === '100' || code === '101' || code === '110') {
+        } else if (code === types.LISTINGS_OF_ONE_UNAMBIGUOUS_LOCATION || code === types.LISTINGS_OF_BEST_AMBIGUOUS_LOCATION || code === types.LISTINGS_LARGE_LOCATION) {
           commit(types.MUTATE_UPDATE_SEARCH_LISTS, response);
           commit(types.CURRENT_COMPONENT_NAME, 'search-lists');
 
-          console.log(response);
         } else {
           commit(types.CURRENT_COMPONENT_NAME, 'error-page');
           commit(types.CURRENT_REQUEST_ERROR, response.errors);
@@ -47,7 +46,6 @@ export default {
         const list = setIdToList(response);
         commit(types.MUTATE_UPDATE_SEARCH_LISTS, response);
         commit(types.CURRENT_COMPONENT_NAME, 'search-lists');
-        console.log(response);
       })
   },
   [types.UPDATE_CHOSEN_SEARCH_LIST]: ({commit}, payload) => {
