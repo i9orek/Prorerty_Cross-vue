@@ -25,10 +25,10 @@ export default {
       .then(({response}) => {
         const list = setIdToList(response);
         const code = response.application_response_code;
-        if (code === constants.AMBIGUOUS_LOCATION || code === constants.MISSPELLED_LOCATION) {
+        if (code === AMBIGUOUS_LOCATION || code === MISSPELLED_LOCATION) {
           commit(types.MUTATE_UPDATE_LOCATION_BELOW, response);
           commit(types.CURRENT_COMPONENT_NAME, 'location-list');
-        } else if (code === constants.LISTINGS_OF_ONE_UNAMBIGUOUS_LOCATION || code === constants.LISTINGS_OF_BEST_AMBIGUOUS_LOCATION || code === constants.LISTINGS_LARGE_LOCATION) {
+        } else if (code === LISTINGS_OF_ONE_UNAMBIGUOUS_LOCATION || code === LISTINGS_OF_BEST_AMBIGUOUS_LOCATION || code === LISTINGS_LARGE_LOCATION) {
           commit(types.MUTATE_UPDATE_SEARCH_LISTS, response);
           commit(types.CURRENT_COMPONENT_NAME, 'search-lists');
 
