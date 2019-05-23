@@ -24,10 +24,9 @@ export default {
     ...mapActions({
       setChosenItemId:types.UPDATE_CHOSEN_SEARCH_LIST,
     }),
-    doWithSearchList(el){
-      const id = el.listId;
-      this.$router.push({name:'list',params:{id:id}});
-      this.setChosenItemId(id);
+    doWithSearchList({listId}){
+      this.$router.push({name:'list',params:{id:listId}});
+      this.setChosenItemId(listId);
     }
   }
 };
