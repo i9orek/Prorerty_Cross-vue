@@ -26,7 +26,7 @@ export default {
     }),
     doWithSearchList(el){
       const id = el.listId;
-      this.$router.push('/search/'+ id);
+      this.$router.push({name:'list',params:{id:id}});
       this.setChosenItemId(id);
     }
   }
