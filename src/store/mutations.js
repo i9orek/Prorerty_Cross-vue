@@ -21,4 +21,7 @@ export default {
   [types.CHOSEN_SEARCH_LIST]: (state, payload) => {
     state.chosenSearchList = payload;
   },
+  [types.MUTATE_CHOSEN_ITEM]: (state, payload) => {
+    state.chosenItem = payload;
+  }
 }

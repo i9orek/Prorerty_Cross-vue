@@ -11,7 +11,7 @@ import {
 import axios from 'axios-jsonp-pro';
 
 const setIdToList = function (item) {
-  const id = Math.floor(Math.random()*10000);
+  const id = Math.floor(Math.random() * 10000);
   return item.listId = id;
 }
 
@@ -22,16 +22,19 @@ export default {
     axios.jsonp(
         `https://api.nestoria.co.uk/api?encoding=json&pretty=1&action=search_listings&place_name=${payload}`
       )
-      .then(({response}) => {
+      .then(({
+        response
+      }) => {
         const list = setIdToList(response);
         const code = response.application_response_code;
         if (code === AMBIGUOUS_LOCATION || code === MISSPELLED_LOCATION) {
           commit(types.MUTATE_UPDATE_LOCATION_BELOW, response);
           commit(types.CURRENT_COMPONENT_NAME, 'location-list');
-        } else if (code === LISTINGS_OF_ONE_UNAMBIGUOUS_LOCATION || code === LISTINGS_OF_BEST_AMBIGUOUS_LOCATION || code === LISTINGS_LARGE_LOCATION) {
+        } else if (code === LISTINGS_OF_ONE_UNAMBIGUOUS_LOCATION || code ===
+          LISTINGS_OF_BEST_AMBIGUOUS_LOCATION || code === LISTINGS_LARGE_LOCATION) {
           commit(types.MUTATE_UPDATE_SEARCH_LISTS, response);
           commit(types.CURRENT_COMPONENT_NAME, 'search-lists');
-
+            console.log(response);
         } else {
           commit(types.CURRENT_COMPONENT_NAME, 'error-page');
           commit(types.CURRENT_REQUEST_ERROR, response.errors);
@@ -55,7 +58,15 @@ export default {
         commit(types.CURRENT_COMPONENT_NAME, 'search-lists');
       })
   },
-  [types.UPDATE_CHOSEN_SEARCH_LIST]: ({commit}, payload) => {
+  [types.UPDATE_CHOSEN_SEARCH_LIST]: ({
+    commit
+  }, payload) => {
     commit(types.CHOSEN_SEARCH_LIST, payload);
+  },
+  [types.SET_CHOSEN_ITEM]: ({
+    commit
+  }, payload) => {
+    const list = setIdToList(payload);
+    commit(types.MUTATE_CHOSEN_ITEM, payload);
   }
 }

@@ -4,7 +4,12 @@
       <div>
         <div class="container">
           <h2>search result ({{currentListings.length}} of {{currentSearchList.total_pages}} matches)</h2>
-          <div class="content" v-for="(el,index) in currentListings" :key="index">
+          <div
+            class="content"
+            v-for="(el,index) in currentListings"
+            :key="index"
+            @click="goToItemRoute(el)"
+          >
             <img :src="el.img_url">
             <h3>{{el.price_formatted}}</h3>
             <h4>{{el.title}}</h4>
@@ -16,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import * as types from "../store/types";
 
 export default {
@@ -31,6 +36,16 @@ export default {
     },
     currentListings() {
       return this.currentSearchList.listings;
+    }
+  },
+  methods: {
+    ...mapActions({
+      setChosenItem: types.SET_CHOSEN_ITEM
+    }),
+    goToItemRoute(el){
+      this.setChosenItem(el);
+      this.$router.push({name:'item',params:{title:el.title}});
+      console.log(el);
     }
   }
 };

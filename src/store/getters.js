@@ -11,5 +11,8 @@ export default {
   },
   [types.CURRENT_COMPONENT]: state => {
     return state.currentComponent;
+  },
+  [types.CHOSEN_ITEM]: state => {
+    return state.chosenItem;
   }
 }

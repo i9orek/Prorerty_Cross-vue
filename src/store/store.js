@@ -14,7 +14,8 @@ export default new Vuex.Store({
     locationBelow:[],
     currentComponent: '',
     currentRequestError:'',
-    chosenSearchList:0
+    chosenSearchList:0,
+    chosenItem:null
   },
   getters,
   mutations,
