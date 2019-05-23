@@ -4,7 +4,7 @@ import * as types from './types';
 import axios from 'axios-jsonp-pro';
 
 function setIdToList(item){
-  let id = Math.floor(Math.random()*10000);
+  const id = Math.floor(Math.random()*10000);
   return item.listId = id;
 }
 
@@ -16,8 +16,8 @@ export default {
         `https://api.nestoria.co.uk/api?encoding=json&pretty=1&action=search_listings&place_name=${payload}`
       )
       .then(({response}) => {
-        let list = setIdToList(response);
-        let code = response.application_response_code;
+        const list = setIdToList(response);
+        const code = response.application_response_code;
         if (code === '200' || code === '202') {
           commit(types.MUTATE_UPDATE_LOCATION_BELOW, response);
           commit(types.CURRENT_COMPONENT_NAME, 'location-list');
@@ -44,7 +44,7 @@ export default {
       .then(({
         response
       }) => {
-        let list = setIdToList(response);
+        const list = setIdToList(response);
         commit(types.MUTATE_UPDATE_SEARCH_LISTS, response);
         commit(types.CURRENT_COMPONENT_NAME, 'search-lists');
         console.log(response);

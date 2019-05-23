@@ -3,7 +3,7 @@
     <ul class="search-list">
       Recent searches:
       london
-      <li v-for="(el,index) in getLists" :key="index" :id="el.listId" @click="doWithSearchList($event,'/search/'+ el.listId)">
+      <li v-for="(el,index) in getLists" :key="index" @click="doWithSearchList(el)">
         <p>search #{{index+1}} ({{el.total_pages}}) </p>
       </li>
     </ul>
@@ -24,9 +24,9 @@ export default {
     ...mapActions({
       setChosenItemId:types.UPDATE_CHOSEN_SEARCH_LIST,
     }),
-    doWithSearchList(event,route){
-      let id = event.target.listId;
-      this.$router.push(route);
+    doWithSearchList(el){
+      const id = el.listId;
+      this.$router.push('/search/'+ id);
       this.setChosenItemId(id);
     }
   }

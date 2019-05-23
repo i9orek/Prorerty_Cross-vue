@@ -2,6 +2,7 @@
 
 export const SEARCH_LISTS = 'searchLists';
 export const LOCATION_BELOW = 'locationBelow';
+export const CURRENT_COMPONENT = 'currentComponent';
 
 //Mutations
 

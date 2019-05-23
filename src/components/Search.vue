@@ -13,8 +13,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { mapState } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import * as types from "../store/types";
 import SearchLists from "./SearchLists";
 import LocationList from "./LocationList.vue";
@@ -29,9 +28,9 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      currentComponent: state => state.currentComponent
-    })
+    ...mapGetters({
+      currentComponent: types.CURRENT_COMPONENT
+    }),
   },
   methods: {
     ...mapActions({

@@ -18,32 +18,32 @@
 <script>
 import { mapGetters } from "vuex";
 import * as types from "../store/types";
-import { close } from "fs";
 
 export default {
-  data: function() {
-    return {
-      id: this.$route.params.id
-    };
+//-----------------------------------------
+
+  props:{
+    id:['id']
   },
+
+  //-------------------------------------
+
   computed: {
     ...mapGetters({
       getLists: types.SEARCH_LISTS,
     }),
+
+    //-------------------------------------------------------------------
+    
     currentSearchList() {
-      return this.getLists.find(el => el.listId == this.id);
+      return this.getLists.find(el => el.listId === this.id);
     },
     currentListings() {
       return this.currentSearchList.listings;
-    }
-  },
-  methods: {}
+    },
 
-  // watch:{
-  //     '$route'(to,from){
-  //         this.id= to.params.id;
-  //     }
-  // }
+    //-----------------------------------------------------------------
+  },
 };
 </script>
 

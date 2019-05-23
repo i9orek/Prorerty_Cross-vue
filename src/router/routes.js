@@ -8,6 +8,7 @@ export const routes = [{
   {
     path: '/search/:id',
     name:'search/:id', 
-    component: SearchList
+    component: SearchList,
+    props:true
   },
 ];
