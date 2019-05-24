@@ -1,5 +1,6 @@
 <template>
   <div class="search-wrapper">
+    <button @click="some()">ddvcvdb</button>
     <h2>Property Cross</h2>
     <button>Faves</button>
     <p>“Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!”</p>
@@ -43,6 +44,9 @@ export default {
     onInputChange(query) {
       this.updateData(query);
       this.clearInput();
+    },
+    some(){
+      console.log(this.$store.state);
     }
   },
   components: {

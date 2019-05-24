@@ -11,18 +11,18 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     searchLists: [],
-    locationBelow:[],
+    locationBelow: [],
     currentComponent: '',
-    currentRequestError:'',
-    chosenSearchList:0,
-    chosenLocation:null,
-    favorites:[]
+    currentRequestError: '',
+    chosenSearchList: 0,
+    chosenLocation: null,
+    favorites: []
   },
   getters,
   mutations,
   actions,
-  created(){
-    this.searchLists = localStorage.searchLists;
-    this.favorites = localStorage.favorites;
+  created: function () {
+    this.searchLists = JSON.parse(localStorage.getItem('searchLists'));
+    this.favorites = JSON.parse(localStorage.getItem('favorites'));
   }
 });
