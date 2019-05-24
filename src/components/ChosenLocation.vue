@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Property details</h1>
-    <button>add to favorites</button>
+    <button @click="getFavorites(location)">add to favorites</button>
     <div>
       <h2>{{location.price_formatted}}</h2>
       <h3>{{location.title}}</h3>
@@ -14,12 +14,17 @@
 
 <script>
 import * as types from "../store/types";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   computed: {
     ...mapGetters({
-      location: types.CHOSEN_LOCATION
+      location: types.CHOSEN_LOCATION,
     })
+  },
+  methods: {
+    ...mapActions({
+      getFavorites: types.UPDATE_FAVORITES
+    }),
   }
 };
 </script>

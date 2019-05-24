@@ -15,9 +15,14 @@ export default new Vuex.Store({
     currentComponent: '',
     currentRequestError:'',
     chosenSearchList:0,
-    chosenLocation:null
+    chosenLocation:null,
+    favorites:[]
   },
   getters,
   mutations,
   actions,
+  created(){
+    this.searchLists = localStorage.searchLists;
+    this.favorites = localStorage.favorites;
+  }
 });

@@ -14,5 +14,8 @@ export default {
   },
   [types.CHOSEN_LOCATION]: state => {
     return state.chosenLocation;
+  },
+  [types.FAVORITES]:state=>{
+    return state.favorites;
   }
 }

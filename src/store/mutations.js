@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as types from './types';
 
 export default {
@@ -23,5 +24,8 @@ export default {
   },
   [types.MUTATE_CHOSEN_LOCATION]: (state, payload) => {
     state.chosenLocation = payload;
+  },
+  [types.SAVE_TO_FAVORITES]: (state, payload) => {
+    state.favorites = !state.favorites.length ? [payload] : [...state.favorites, payload];
   }
 }

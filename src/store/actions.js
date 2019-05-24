@@ -10,15 +10,23 @@ import {
 } from '../constants/constants';
 import axios from 'axios-jsonp-pro';
 
-const setIdToList = function (item) {
+const setIdToList = (item) => {
   const id = Math.floor(Math.random() * 10000);
   return item.listId = id;
-}
+};
+
+const toLocalStorage = (getterName, locStorageItemName) => {
+  const itemValue = JSON.stringify(getterName);
+  localStorage.setItem(locStorageItemName, itemValue);
+};
 
 export default {
   [types.UPDATE_SEARCH_LISTS]: ({
-    commit
+    commit,
+    getters
   }, payload) => {
+
+
     axios.jsonp(
         `https://api.nestoria.co.uk/api?encoding=json&pretty=1&action=search_listings&place_name=${payload}`
       )
@@ -34,6 +42,7 @@ export default {
           LISTINGS_OF_BEST_AMBIGUOUS_LOCATION || code === LISTINGS_LARGE_LOCATION) {
           commit(types.MUTATE_UPDATE_SEARCH_LISTS, response);
           commit(types.CURRENT_COMPONENT_NAME, 'search-lists');
+          toLocalStorage(getters[types.SEARCH_LISTS], 'searchLists');
         } else {
           commit(types.CURRENT_COMPONENT_NAME, 'error-page');
           commit(types.CURRENT_REQUEST_ERROR, response.errors);
@@ -43,8 +52,10 @@ export default {
         console.log('SOME WENT WRONG');
       });
   },
+
   [types.UPDATE_SEARCH_BY_GPS]: ({
-    commit
+    commit,
+    getters
   }, payload) => {
     axios.jsonp(
         `https://api.nestoria.co.uk/api?encoding=json&pretty=1&action=search_listings&centre_point=${payload}`
@@ -55,6 +66,7 @@ export default {
         const list = setIdToList(response);
         commit(types.MUTATE_UPDATE_SEARCH_LISTS, response);
         commit(types.CURRENT_COMPONENT_NAME, 'search-lists');
+        toLocalStorage(getters[types.SEARCH_LISTS], 'searchLists');
       })
   },
   [types.UPDATE_CHOSEN_SEARCH_LIST]: ({
@@ -67,5 +79,15 @@ export default {
   }, payload) => {
     const list = setIdToList(payload);
     commit(types.MUTATE_CHOSEN_LOCATION, payload);
-  }
+  },
+  [types.UPDATE_FAVORITES]: ({
+    commit,
+    getters
+  }, payload) => {
+    commit(types.SAVE_TO_FAVORITES, payload);
+    toLocalStorage(getters[types.FAVORITES], 'favorites');
+  },
+  // [types.DELETE_FROM_FAVORITES]:({commit,getters},payload)=>{
+
+  // }
 }

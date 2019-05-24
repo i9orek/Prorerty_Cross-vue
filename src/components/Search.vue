@@ -30,7 +30,7 @@ export default {
   computed: {
     ...mapGetters({
       currentComponent: types.CURRENT_COMPONENT
-    }),
+    })
   },
   methods: {
     ...mapActions({
