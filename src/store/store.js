@@ -15,7 +15,7 @@ export default new Vuex.Store({
     currentComponent: '',
     currentRequestError:'',
     chosenSearchList:0,
-    chosenItem:null
+    chosenLocation:null
   },
   getters,
   mutations,

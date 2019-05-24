@@ -22,11 +22,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      setChosenItemId:types.UPDATE_CHOSEN_SEARCH_LIST,
+      setChosenLocationId:types.UPDATE_CHOSEN_SEARCH_LIST,
     }),
     doWithSearchList({listId}){
       this.$router.push({name:'list',params:{id:listId}});
-      this.setChosenItemId(listId);
+      this.setChosenLocationId(listId);
     }
   }
 };

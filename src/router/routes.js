@@ -1,6 +1,6 @@
 import Search from '../components/Search.vue';
 import SearchList from '../components/SearchList.vue';  
-import CurrentItem from '../components/CurrentItem.vue';
+import ChosenLocation from '../components/ChosenLocation.vue';
 
 export const routes = [{
     path: '/',
@@ -13,8 +13,8 @@ export const routes = [{
     props:true,
   },
   {
-    path:'/item/:title',
-    name:'item',
-    component: CurrentItem,
+    path:'/location/:title',
+    name:'location',
+    component: ChosenLocation,
   }
 ];

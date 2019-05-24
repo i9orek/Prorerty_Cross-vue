@@ -34,7 +34,6 @@ export default {
           LISTINGS_OF_BEST_AMBIGUOUS_LOCATION || code === LISTINGS_LARGE_LOCATION) {
           commit(types.MUTATE_UPDATE_SEARCH_LISTS, response);
           commit(types.CURRENT_COMPONENT_NAME, 'search-lists');
-            console.log(response);
         } else {
           commit(types.CURRENT_COMPONENT_NAME, 'error-page');
           commit(types.CURRENT_REQUEST_ERROR, response.errors);
@@ -63,10 +62,10 @@ export default {
   }, payload) => {
     commit(types.CHOSEN_SEARCH_LIST, payload);
   },
-  [types.SET_CHOSEN_ITEM]: ({
+  [types.SET_CHOSEN_LOCATION]: ({
     commit
   }, payload) => {
     const list = setIdToList(payload);
-    commit(types.MUTATE_CHOSEN_ITEM, payload);
+    commit(types.MUTATE_CHOSEN_LOCATION, payload);
   }
 }
