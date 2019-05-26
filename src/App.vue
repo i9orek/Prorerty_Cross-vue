@@ -15,3 +15,12 @@
   max-width: 800px;
 }
 </style>
+
+<script>
+import getFromlocalStorage from "./store/getFromlocalStorage";
+
+export default {
+  created: getFromlocalStorage
+};
+</script>
+

@@ -1,6 +1,6 @@
 <template>
   <div class="search-wrapper">
-    <button @click="some()">ddvcvdb</button>
+    <button @click="some">ddvcvdb</button>
     <h2>Property Cross</h2>
     <button>Faves</button>
     <p>“Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!”</p>
@@ -30,7 +30,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentComponent: types.CURRENT_COMPONENT
+      currentComponent: types.CURRENT_COMPONENT,
+      searchLists: types.SEARCH_LISTS
     })
   },
   methods: {
@@ -42,10 +43,19 @@ export default {
       this.$refs.searchInput.value = "";
     },
     onInputChange(query) {
-      this.updateData(query);
-      this.clearInput();
+      if (this.searchLists.some(el=>el.locations[0].place_name === this.query) !== true) {
+        this.updateData(query);
+        this.clearInput();
+        console.log(this.$store.state.searchLists);
+        console.log('NEW SEARCH');
+      }
+      else{
+        this.clearInput();
+        alert("YOU ALREADY FIND THIS ");
+        return
+      }        
     },
-    some(){
+    some() {
       console.log(this.$store.state);
     }
   },
@@ -57,6 +67,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>

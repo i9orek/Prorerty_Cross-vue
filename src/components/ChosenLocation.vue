@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Property details</h1>
-    <button @click="getFavorites(location)">add to favorites</button>
+    <button @click="filterAndPushToLocalStorage(location)">add to favorites</button>
     <div>
       <h2>{{location.price_formatted}}</h2>
       <h3>{{location.title}}</h3>
@@ -19,12 +19,25 @@ export default {
   computed: {
     ...mapGetters({
       location: types.CHOSEN_LOCATION,
+      favorites: types.FAVORITES
     })
   },
   methods: {
     ...mapActions({
       getFavorites: types.UPDATE_FAVORITES
     }),
+    filterAndPushToLocalStorage(location) {
+      if (
+        this.favorites.find(el => el.title === this.location.title) ===
+        undefined
+      ) {
+        this.getFavorites(location);
+        console.log("done");
+        console.log(this.$store.state.favorites);
+      }
+      console.log("nope");
+      console.log(this.$store.state.favorites);
+    }
   }
 };
 </script>

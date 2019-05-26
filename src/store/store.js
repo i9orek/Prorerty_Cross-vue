@@ -12,7 +12,7 @@ export default new Vuex.Store({
   state: {
     searchLists: [],
     locationBelow: [],
-    currentComponent: '',
+    currentComponent: 'search-lists',
     currentRequestError: '',
     chosenSearchList: 0,
     chosenLocation: null,
@@ -21,8 +21,4 @@ export default new Vuex.Store({
   getters,
   mutations,
   actions,
-  created: function () {
-    this.searchLists = JSON.parse(localStorage.getItem('searchLists'));
-    this.favorites = JSON.parse(localStorage.getItem('favorites'));
-  }
 });

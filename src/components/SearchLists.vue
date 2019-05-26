@@ -2,7 +2,6 @@
   <div>
     <ul class="search-list">
       Recent searches:
-      london
       <li v-for="(el,index) in getLists" :key="index" @click="doWithSearchList(el)">
         <p>search #{{index+1}} ({{el.total_pages}}) </p>
       </li>
@@ -28,7 +27,7 @@ export default {
       this.$router.push({name:'list',params:{id:listId}});
       this.setChosenLocationId(listId);
     }
-  }
+  },
 };
 </script>
 

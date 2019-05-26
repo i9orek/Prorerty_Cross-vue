@@ -87,7 +87,4 @@ export default {
     commit(types.SAVE_TO_FAVORITES, payload);
     toLocalStorage(getters[types.FAVORITES], 'favorites');
   },
-  // [types.DELETE_FROM_FAVORITES]:({commit,getters},payload)=>{
-
-  // }
 }
