@@ -43,7 +43,7 @@ export default {
       this.$refs.searchInput.value = "";
     },
     onInputChange(query) {
-      if (this.searchLists.some(el=>el.locations[0].place_name === this.query) !== true) {
+      if (this.searchLists.some(el=>el.locations[0].place_name === this.query.toLowerCase()) !== true) {
         this.updateData(query);
         this.clearInput();
         console.log(this.$store.state.searchLists);
