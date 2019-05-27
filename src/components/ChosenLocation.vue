@@ -32,11 +32,10 @@ export default {
         undefined
       ) {
         this.getFavorites(location);
-        console.log("done");
-        console.log(this.$store.state.favorites);
       }
-      console.log("nope");
-      console.log(this.$store.state.favorites);
+      else{
+        alert("YOU ALREADY HAVE THIS BOOKMARK IN YOUR FAVORITES");
+      }
     }
   }
 };
