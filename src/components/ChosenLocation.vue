@@ -15,28 +15,37 @@
 <script>
 import * as types from "../store/types";
 import { mapGetters, mapActions } from "vuex";
+import getProperty from '../utils/getProperty';
 export default {
   computed: {
     ...mapGetters({
       location: types.CHOSEN_LOCATION,
       favorites: types.FAVORITES
-    })
+    }),
   },
   methods: {
     ...mapActions({
-      getFavorites: types.UPDATE_FAVORITES
+      addToFavorites: types.UPDATE_FAVORITES,
+      removeFromFavorites:types.MINUS_FROM_FAVORITES
     }),
-    filterAndPushToLocalStorage(location) {
-      if (
-        this.favorites.find(el => el.title === this.location.title) ===
-        undefined
-      ) {
-        this.getFavorites(location);
+      filteredFavorites(location){
+        const updatedFavorites = this.favorites.filter(el=>{
+         return el.title !== location.title
+        });
+        return updatedFavorites;
+      },
+      filterAndPushToLocalStorage(location){
+        if(this.favorites.some(el=>el.title === getProperty(['title'],location))){
+          this.removeFromFavorites(this.filteredFavorites(location));
+          this.addToFavorites(location);
+          console.log(this.favorites);       
+        }
+        else{
+          this.addToFavorites(location);
+          console.log(this.favorites);
+        }   
       }
-      else{
-        alert("YOU ALREADY HAVE THIS BOOKMARK IN YOUR FAVORITES");
-      }
-    }
+    //---------------------------------------------------------------------
   }
 };
 </script>
