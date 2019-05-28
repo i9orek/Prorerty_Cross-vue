@@ -28,4 +28,4 @@ export const UPDATE_CURRENT_COMPONENT_NAME = 'updateCurCompName'
 export const UPDATE_CHOSEN_SEARCH_LIST = 'updateChosenSearchList';
 export const SET_CHOSEN_LOCATION = 'setChosenLocation';
 export const UPDATE_FAVORITES = 'updateFavorites';
-export const MINUS_FROM_FAVORITES = ' minusFromFaviorites'
+export const UPDATE_DELETE_FROM_FAVORITES = ' updateDeleteFromFaviorites'

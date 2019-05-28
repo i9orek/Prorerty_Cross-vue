@@ -23,19 +23,22 @@ export default {
       location: types.CHOSEN_LOCATION,
       favorites: types.FAVORITES
     }),
-    typeOfBtn(location) {
-      if (!this.favorites.length) {
+    typeOfBtn() {
+      if (
+        !this.favorites.length ||
+        this.favorites.some(
+          el => el.title === getProperty(["title"], this.location)
+        ) === false
+      ) {
         return true;
       }
-      return this.favorites.some(
-        el => el.title === getProperty(["title"], location)
-      );
+      return false;
     }
   },
   methods: {
     ...mapActions({
       addToFavorites: types.UPDATE_FAVORITES,
-      deleteFromFavorites: types.MINUS_FROM_FAVORITES
+      deleteFromFavorites: types.UPDATE_DELETE_FROM_FAVORITES
     }),
     filteredFavorites({ title }) {
       const updatedFavorites = this.favorites.filter(el => {
@@ -48,7 +51,6 @@ export default {
     },
     removeFromFavorites(location) {
       this.deleteFromFavorites(this.filteredFavorites(location));
-      this.addToFavorites(location);
     }
   }
 };
