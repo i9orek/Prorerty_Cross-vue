@@ -43,11 +43,9 @@ export default {
     },
     pushToFavorites(location) {
       this.addToFavorites(location);
-      console.log(this.favorites);
     },
     removeFromFavorites(location) {
       this.deleteFromFavorites(this.filteredFavorites(location));
-      console.log(this.favorites);
     }
   }
 };
