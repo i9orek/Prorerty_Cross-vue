@@ -17,7 +17,7 @@ export default {
     ...mapGetters({
       getLocLists: types.LOCATION_BELOW
     })
-  },
+  }
 };
 </script>
 

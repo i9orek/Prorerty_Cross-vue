@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import * as types from './types';
 
 export default {
@@ -15,7 +13,7 @@ export default {
   [types.CHOSEN_LOCATION]: state => {
     return state.chosenLocation;
   },
-  [types.FAVORITES]:state=>{
+  [types.FAVORITES]: state => {
     return state.favorites;
   }
 }

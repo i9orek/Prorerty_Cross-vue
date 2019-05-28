@@ -42,9 +42,9 @@ export default {
     ...mapActions({
       setChosenLocation: types.SET_CHOSEN_LOCATION
     }),
-    goToItemRoute(el){
+    goToItemRoute(el) {
       this.setChosenLocation(el);
-      this.$router.push({name:'location',params:{title:el.title}});
+      this.$router.push({ name: "location", params: { title: el.title } });
     }
   }
 };

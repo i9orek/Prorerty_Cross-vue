@@ -14,7 +14,7 @@ export default {
     ...mapState({
       errorText: types.CURRENT_REQUEST_ERROR
     })
-  },
+  }
 };
 </script>
 

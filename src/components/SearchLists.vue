@@ -3,7 +3,7 @@
     <ul class="search-list">
       Recent searches:
       <li v-for="(el,index) in getLists" :key="index" @click="doWithSearchList(el)">
-        <p>search #{{index+1}} ({{el.total_pages}}) </p>
+        <p>search #{{index+1}} ({{el.total_pages}})</p>
       </li>
     </ul>
   </div>
@@ -21,13 +21,13 @@ export default {
   },
   methods: {
     ...mapActions({
-      setChosenLocationId:types.UPDATE_CHOSEN_SEARCH_LIST,
+      setChosenLocationId: types.UPDATE_CHOSEN_SEARCH_LIST
     }),
-    doWithSearchList({listId}){
-      this.$router.push({name:'list',params:{id:listId}});
+    doWithSearchList({ listId }) {
+      this.$router.push({ name: "list", params: { id: listId } });
       this.setChosenLocationId(listId);
     }
-  },
+  }
 };
 </script>
 

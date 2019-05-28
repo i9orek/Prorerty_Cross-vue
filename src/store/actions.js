@@ -49,6 +49,7 @@ export default {
         }
       })
       .catch(function (error) {
+        console.log('SOME WENT WRONG');
       });
   },
 
@@ -86,7 +87,9 @@ export default {
     commit(types.SAVE_TO_FAVORITES, payload);
     toLocalStorage(getters[types.FAVORITES], 'favorites');
   },
-  [types.MINUS_FROM_FAVORITES] : ({commit},payload) =>{
-    commit(types.DELETE_FROM_FAVORITES,payload);
+  [types.MINUS_FROM_FAVORITES]: ({
+    commit
+  }, payload) => {
+    commit(types.DELETE_FROM_FAVORITES, payload);
   }
 }

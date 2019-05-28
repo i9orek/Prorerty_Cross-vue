@@ -42,18 +42,21 @@ export default {
       this.$refs.searchInput.value = "";
     },
     onInputChange(query) {
-      if (this.searchLists.some(el=>el.locations[0].place_name === this.query.toLowerCase()) === false) {
+      if (
+        this.searchLists.some(
+          el => el.locations[0].place_name === this.query.toLowerCase()
+        ) === false
+      ) {
         this.updateData(query);
         this.clearInput();
         console.log(this.$store.state.searchLists);
-        console.log('NEW SEARCH');
-      }
-      else{
+        console.log("NEW SEARCH");
+      } else {
         this.clearInput();
         alert("YOU ALREADY FIND THIS ");
-        return
-      }        
-    },
+        return;
+      }
+    }
   },
   components: {
     "search-lists": SearchLists,

@@ -24,10 +24,12 @@ export default {
       favorites: types.FAVORITES
     }),
     typeOfBtn(location) {
-      if(!this.favorites.length){
-        return true
+      if (!this.favorites.length) {
+        return true;
       }
-      return this.favorites.some(el => el.title === getProperty(["title"], location)) 
+      return this.favorites.some(
+        el => el.title === getProperty(["title"], location)
+      );
     }
   },
   methods: {
@@ -35,7 +37,7 @@ export default {
       addToFavorites: types.UPDATE_FAVORITES,
       deleteFromFavorites: types.MINUS_FROM_FAVORITES
     }),
-    filteredFavorites({title}) {
+    filteredFavorites({ title }) {
       const updatedFavorites = this.favorites.filter(el => {
         return el.title !== title;
       });

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import * as types from './types';
 
 export default {
@@ -29,7 +28,7 @@ export default {
     state.favorites = !state.favorites.length ? [payload] : [...state.favorites, payload];
   },
   //======================================================
-  [types.DELETE_FROM_FAVORITES] : (state, payload) => {
-    state.favorites =  payload;
+  [types.DELETE_FROM_FAVORITES]: (state, payload) => {
+    state.favorites = payload;
   },
 }

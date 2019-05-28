@@ -20,7 +20,6 @@ export const SAVE_FAVORITES_TO_LOCAL_STORAGE = 'saveFavoritesToLocalStorage';
 export const SAVE_TO_FAVORITES = 'saveToFavorites';
 export const DELETE_FROM_FAVORITES = 'deleteFromFavorites';
 
-
 //Actions
 
 export const UPDATE_SEARCH_LISTS = 'updateSearchLists';
