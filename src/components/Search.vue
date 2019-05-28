@@ -1,7 +1,7 @@
 <template>
   <div class="search-wrapper">
     <h2>Property Cross</h2>
-    <button>Faves</button>
+    <button @click="goToItemRoute">Faves</button>
     <p>“Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!”</p>
     <input ref="searchInput" type="text" v-model="query" @keyup.enter="onInputChange(query)">
     <button @click="onInputChange(query)">Go</button>
@@ -20,7 +20,7 @@ import SearchLists from "./SearchLists";
 import LocationList from "./LocationList.vue";
 import SearchError from "./SearchError.vue";
 import SearchList from "./SearchList";
-import { getPriority } from "os";
+import Favorites from './Favorites';
 
 export default {
   data: function() {
@@ -54,16 +54,20 @@ export default {
         this.clearInput();
       } else {
         this.clearInput();
-        alert("YOU ALREADY FIND THIS ");
+        alert("YOU ALREADY FOUND THIS ");
         return;
       }
+    },
+    goToItemRoute() {
+      this.$router.push({ name: "favorites"});
     }
   },
   components: {
     "search-lists": SearchLists,
     "location-list": LocationList,
     "error-page": SearchError,
-    "search-list": SearchList
+    "search-list": SearchList,
+    "favorites" : Favorites
   }
 };
 </script>
