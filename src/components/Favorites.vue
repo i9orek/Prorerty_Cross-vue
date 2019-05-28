@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>Favourites</h2>
     <ul class="favourite-list">
       <li v-for="item in favorites" :key="item.listId">
         <div>
@@ -14,7 +15,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import * as types from '../store/types';
+import * as types from "../store/types";
 export default {
   computed: {
     ...mapGetters({
