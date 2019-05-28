@@ -24,10 +24,7 @@ export default {
       favorites: types.FAVORITES
     }),
     typeOfBtn(location) {
-      if (this.favorites.some(el => el.title === getProperty(["title"], location))) {
-        return true;
-      }
-      return false;
+      return this.favorites.some(el => el.title === getProperty(["title"], location)) 
     }
   },
   methods: {
