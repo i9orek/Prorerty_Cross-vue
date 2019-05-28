@@ -49,7 +49,6 @@ export default {
         }
       })
       .catch(function (error) {
-        console.log('SOME WENT WRONG');
       });
   },
 
