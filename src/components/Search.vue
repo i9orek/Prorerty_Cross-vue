@@ -15,16 +15,18 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import * as types from "../store/types";
+import getProperty from "../utils/getProperty";
 import SearchLists from "./SearchLists";
 import LocationList from "./LocationList.vue";
 import SearchError from "./SearchError.vue";
 import SearchList from "./SearchList";
+import { getPriority } from "os";
 
 export default {
   data: function() {
     return {
       query: "",
-      gps: "51.684183,-3.431481" //default prop , need to change
+      gps: "51.684183,-3.431481"
     };
   },
   computed: {
@@ -42,15 +44,14 @@ export default {
       this.$refs.searchInput.value = "";
     },
     onInputChange(query) {
+      let searchQuery = this.query.toLowerCase();
       if (
-        this.searchLists.some(
-          el => el.locations[0].place_name === this.query.toLowerCase()
-        ) === false
+        !this.searchLists.some(
+          el => getProperty(["locations"], el)[0].place_name === searchQuery
+        )
       ) {
         this.updateData(query);
         this.clearInput();
-        console.log(this.$store.state.searchLists);
-        console.log("NEW SEARCH");
       } else {
         this.clearInput();
         alert("YOU ALREADY FIND THIS ");
