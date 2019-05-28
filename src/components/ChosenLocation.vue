@@ -24,6 +24,9 @@ export default {
       favorites: types.FAVORITES
     }),
     typeOfBtn(location) {
+      if(!this.favorites.length){
+        return true
+      }
       return this.favorites.some(el => el.title === getProperty(["title"], location)) 
     }
   },
@@ -32,9 +35,9 @@ export default {
       addToFavorites: types.UPDATE_FAVORITES,
       deleteFromFavorites: types.MINUS_FROM_FAVORITES
     }),
-    filteredFavorites(location) {
+    filteredFavorites({title}) {
       const updatedFavorites = this.favorites.filter(el => {
-        return el.title !== location.title;
+        return el.title !== title;
       });
       return updatedFavorites;
     },
