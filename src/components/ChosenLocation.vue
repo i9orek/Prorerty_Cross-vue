@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Property details</h1>
-    <button v-if="typeOfBtn === false" @click="pushToFavorites(location)">add to favorites</button>
+    <button v-if="typeOfBtn" @click="pushToFavorites(location)">add to favorites</button>
     <button v-else @click="removeFromFavorites(location)">remove from favorites</button>
     <div>
       <h2>{{location.price_formatted}}</h2>
@@ -27,7 +27,7 @@ export default {
       if (!this.favorites.length) {
         return true;
       }
-      return (this.favorites.some(({ title }) => title == getProperty(["title"], this.location)));
+      return (!this.favorites.some(({ title }) => title == getProperty(["title"], this.location)));
     }
   },
   methods: {
