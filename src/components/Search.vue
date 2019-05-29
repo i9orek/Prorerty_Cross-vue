@@ -20,7 +20,7 @@ import SearchLists from "./SearchLists";
 import LocationList from "./LocationList.vue";
 import SearchError from "./SearchError.vue";
 import SearchList from "./SearchList";
-import Favorites from './Favorites';
+import Favorites from "./Favorites";
 
 export default {
   data: function() {
@@ -51,15 +51,13 @@ export default {
         )
       ) {
         this.updateData(query);
-        this.clearInput();
       } else {
-        this.clearInput();
         alert("YOU ALREADY FOUND THIS ");
-        return;
       }
+      this.clearInput();
     },
     goToItemRoute() {
-      this.$router.push({ name: "favorites"});
+      this.$router.push({ name: "favorites" });
     }
   },
   components: {
@@ -67,7 +65,7 @@ export default {
     "location-list": LocationList,
     "error-page": SearchError,
     "search-list": SearchList,
-    "favorites" : Favorites
+    favorites: Favorites
   }
 };
 </script>

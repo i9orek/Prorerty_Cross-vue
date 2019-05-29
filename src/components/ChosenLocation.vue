@@ -23,11 +23,13 @@ export default {
       location: types.CHOSEN_LOCATION,
       favorites: types.FAVORITES
     }),
-    typeOfBtn(){
+    typeOfBtn() {
       if (!this.favorites.length) {
         return true;
       }
-      return (!this.favorites.some(({ title }) => title == getProperty(["title"], this.location)));
+      return !this.favorites.some(
+        ({ title }) => title == getProperty(["title"], this.location)
+      );
     }
   },
   methods: {
