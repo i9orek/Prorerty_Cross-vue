@@ -6,21 +6,23 @@
         <v-btn small dark color="green" @click="goToItemRoute">my favorites</v-btn>
       </v-layout>
       <v-layout column>
-          <div class="body-1 my_instruction_input">“Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!”</div>
-          <v-flex>
-            <v-text-field 
-            autofocus=true
-          dark
-          ref="searchInput"
-          type="text"
-          v-model="query"
-          @keyup.enter="onInputChange(query)"
-        />
-          </v-flex>
+        <div
+          class="body-1 my_instruction_input"
+        >“Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!”</div>
+        <v-flex>
+          <v-text-field
+            autofocus="true"
+            dark
+            ref="searchInput"
+            type="text"
+            v-model="query"
+            @keyup.enter="onInputChange(query)"
+          />
+        </v-flex>
       </v-layout>
       <v-layout row justify-end>
-          <v-btn color="primary" small @click="onInputChange(query)">Go</v-btn>
-          <v-btn color="primary" small @click="updateByGps(gps)">My location</v-btn>
+        <v-btn color="primary" small @click="onInputChange(query)">Go</v-btn>
+        <v-btn color="primary" small @click="updateByGps(gps)">My location</v-btn>
       </v-layout>
       <keep-alive>
         <component :is="currentComponent"></component>
@@ -61,6 +63,9 @@ export default {
       this.$refs.searchInput.value = "";
     },
     onInputChange(query) {
+      if (this.query === "") {
+        return;
+      }
       let searchQuery = this.query.toLowerCase();
       if (
         !this.searchLists.some(
@@ -69,7 +74,7 @@ export default {
       ) {
         this.updateData(query);
       } else {
-        alert("YOU ALREADY FOUND THIS ");
+        alert("YOU HAD ALREADY BEEN SEARCHING FOR THIS");
       }
       this.clearInput();
     },
@@ -88,7 +93,7 @@ export default {
 </script>
 
 <style>
-.my_instruction_input{
+.my_instruction_input {
   margin: 25px 0;
 }
 </style>
