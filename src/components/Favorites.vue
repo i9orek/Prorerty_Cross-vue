@@ -21,7 +21,7 @@ export default {
     ...mapGetters({
       favorites: types.FAVORITES
     })
-  }
+  },
 };
 </script>
 
