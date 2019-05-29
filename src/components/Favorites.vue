@@ -1,15 +1,25 @@
 <template>
   <div>
-    <h2>Favourites</h2>
-    <ul class="favourite-list">
-      <li v-for="item in favorites" :key="item.listId">
-        <div>
-          <img :src="item.img_url">
-          <h3>{{item.price_formatted}}</h3>
-          <h4>{{item.title}}</h4>
-        </div>
-      </li>
-    </ul>
+    <v-container>
+      <h2>Favorites</h2>
+      <v-layout row wrap class="mt-1">
+        <v-flex
+          class="ma-1"
+          v-for="item in favorites"
+          :key="item.listId"
+        >
+          <v-card>
+            <v-responsive class="pa-2">
+              <v-img height="200px" :src="item.img_url"/>
+            </v-responsive>
+            <v-card-text class="light-blue--text">
+              <h3 class="black--text mb-1">{{item.price_formatted}}</h3>
+              <h4>{{item.title}}</h4>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -24,13 +34,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.favourite-list {
-  list-style: none;
-}
-.favourite-list li {
-  border: 1px solid lightgray;
-  padding: 10px 0;
-}
-</style>

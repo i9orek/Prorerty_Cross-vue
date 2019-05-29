@@ -1,15 +1,37 @@
 <template>
   <div>
-    <h1>Property details</h1>
-    <button v-if="typeOfBtn" @click="pushToFavorites(location)">add to favorites</button>
-    <button v-else @click="removeFromFavorites(location)">remove from favorites</button>
-    <div>
-      <h2>{{location.price_formatted}}</h2>
-      <h3>{{location.title}}</h3>
-      <img :src="location.img_url">
-      <h4>{{location.bedroom_number}} bed, {{location.bathroom_number}} bathroom</h4>
-      <p>{{location.summary}}</p>
-    </div>
+    <v-container>
+      <v-layout row nowrap>
+        <h1 class="mb-1">Property details</h1>
+      </v-layout>
+      <v-layout>
+        <v-flex>
+          <v-card>
+            <v-card-text>
+              <h2>{{location.price_formatted}}</h2>
+              <h3 class="light-blue--text">{{location.title}}</h3>
+            </v-card-text>
+            <v-responsive class="pa-2">
+              <v-img height="300px" :src="location.img_url"/>
+            </v-responsive>
+            <v-layout row nowrap justify-space-between>
+              <v-card-text>
+                <h4>{{location.bedroom_number}} bed, {{location.bathroom_number}} bathroom</h4>
+                <div>{{location.summary}}</div>
+              </v-card-text>
+              <v-card-actions class="mb-3 mr-3">
+                <v-btn icon class="mt-2" v-if="typeOfBtn" @click="pushToFavorites(location)">
+                  <v-icon x-large>favorite</v-icon>
+                </v-btn>
+                <v-btn icon class="mt-2" v-else @click="removeFromFavorites(location)">
+                  <v-icon x-large color="red">favorite</v-icon>
+                </v-btn>
+              </v-card-actions>
+            </v-layout>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 

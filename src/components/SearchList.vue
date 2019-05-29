@@ -1,23 +1,28 @@
 <template>
-  <ul>
-    <li>
-      <div>
-        <div class="container">
-          <h2>search result ({{currentListings.length}} of {{currentSearchList.total_pages}} matches)</h2>
-          <div
-            class="content"
-            v-for="(el,index) in currentListings"
-            :key="index"
-            @click="goToItemRoute(el)"
-          >
-            <img :src="el.img_url">
-            <h3>{{el.price_formatted}}</h3>
-            <h4>{{el.title}}</h4>
-          </div>
-        </div>
-      </div>
-    </li>
-  </ul>
+  <div>
+    <v-container>
+      <h2>search result ( {{currentSearchList.total_pages}} of {{currentListings.length}} matches)</h2>
+      <v-layout row wrap class="mt-1">
+        <v-flex
+          tag="a"
+          class="ma-1"
+          v-for="(el,index) in currentListings"
+          :key="index"
+          @click="goToItemRoute(el)"
+        >
+          <v-card>
+            <v-responsive class="pa-2">
+              <v-img height="200px" :src="el.img_url" />
+            </v-responsive>
+            <v-card-text class="light-blue--text">
+              <h3 class="black--text mb-1">{{el.price_formatted}}</h3>
+              <h4>{{el.title}}</h4>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -49,16 +54,3 @@ export default {
   }
 };
 </script>
-
-<style>
-li {
-  list-style: none;
-}
-img {
-  width: 180px;
-}
-.container {
-  display: flex;
-  flex-flow: column nowrap;
-}
-</style>

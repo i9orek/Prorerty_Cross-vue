@@ -1,6 +1,5 @@
 <template>
   <div>
-    <search></search>
     <p>{{errorText}}</p>
   </div>
 </template>

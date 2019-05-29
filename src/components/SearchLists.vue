@@ -1,11 +1,17 @@
 <template>
   <div>
-    <ul class="search-list">
-      Recent searches:
-      <li v-for="(el,index) in getLists" :key="index" @click="doWithSearchList(el)">
-        <p>search #{{index+1}} ({{el.total_pages}})</p>
-      </li>
-    </ul>
+    <v-container>
+      <v-list class="light-blue">
+        <v-list-tile-title class="white--text mb-1">Recent searches:</v-list-tile-title>
+        <v-list-tile
+        class="light-blue--text white my-1"
+        v-for="(el,index) in getLists" 
+        :key="index" 
+        @click="doWithSearchList(el)">
+          <v-list-tile-title>search #{{index+1}} ({{el.total_pages}})</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-container>
   </div>
 </template>
 
@@ -30,13 +36,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.search-list {
-  list-style: none;
-}
-.search-list li {
-  border: 1px solid lightgray;
-  padding: 10px 0;
-}
-</style>

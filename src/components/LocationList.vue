@@ -1,11 +1,18 @@
 <template>
   <div>
-    <ul class="search-list">
-      Please select the location below:
-      <li v-for="(el,index) in getLocLists" :key="index">
-        <a>location #{{index+1}}</a>
-      </li>
-    </ul>
+    <v-container>
+      <v-list class="light-blue">
+        <v-list-tile-title class="white--text mb-1">Please select the location below:</v-list-tile-title>
+        <v-list-tile
+        tag="a"
+          class="light-blue--text white my-1"
+          v-for="(el,index) in getLocLists"
+          :key="index"
+        >
+          <v-list-tile-title>location #{{index+1}}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-container>
   </div>
 </template>
 
@@ -20,13 +27,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.search-list {
-  list-style: none;
-}
-.search-list li {
-  border: 1px solid lightgray;
-  padding: 10px 0;
-}
-</style>
