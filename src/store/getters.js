@@ -15,5 +15,8 @@ export default {
   },
   [types.FAVORITES]: state => {
     return state.favorites;
+  },
+  [types.GET_CHOSEN_SEARCH_LIST]: state=>{
+    return state.chosenSearchList;
   }
 }

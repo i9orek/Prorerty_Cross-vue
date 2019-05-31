@@ -12,7 +12,7 @@ export default new Vuex.Store({
     locationBelow: [],
     currentComponent: 'search-lists',
     currentRequestError: '',
-    chosenSearchList: 0,
+    chosenSearchList: null,
     chosenLocation: null,
     favorites: []
   },

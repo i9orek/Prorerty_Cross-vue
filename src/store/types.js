@@ -5,6 +5,7 @@ export const LOCATION_BELOW = 'locationBelow';
 export const CURRENT_COMPONENT = 'currentComponent';
 export const CHOSEN_LOCATION = 'chosenLocation';
 export const FAVORITES = 'favorites';
+export const GET_CHOSEN_SEARCH_LIST = 'chosenSearchList';
 
 //Mutations
 

@@ -14,7 +14,7 @@ export const routes = [{
     props:true,
   },
   {
-    path:'/location/:title',
+    path: '/search/:id/location/:title',
     name:'location',
     component: ChosenLocation,
   },

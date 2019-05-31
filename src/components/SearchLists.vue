@@ -8,7 +8,7 @@
         v-for="(el,index) in getLists" 
         :key="index" 
         @click="doWithSearchList(el)">
-          <v-list-tile-title>search #{{index+1}} ({{el.total_pages}})</v-list-tile-title>
+          <v-list-tile-title>search #{{index+1}} ({{el.total_results}})</v-list-tile-title>
         </v-list-tile>
       </v-list>
     </v-container>
@@ -27,11 +27,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      setChosenLocationId: types.UPDATE_CHOSEN_SEARCH_LIST
+      chosenSearchList: types.UPDATE_CHOSEN_SEARCH_LIST
     }),
-    doWithSearchList({ listId }) {
-      this.$router.push({ name: "list", params: { id: listId } });
-      this.setChosenLocationId(listId);
+    doWithSearchList(el) {
+      this.$router.push({ name: "list", params: { id: el.listId } });
+      this.chosenSearchList(el);
     }
   }
 };

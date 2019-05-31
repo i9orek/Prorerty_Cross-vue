@@ -11,18 +11,18 @@
         >“Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!”</div>
         <v-flex>
           <v-text-field
-            autofocus="true"
+            autofocus=autofocus
             dark
             ref="searchInput"
             type="text"
             v-model="query"
-            @keyup.enter="onInputChange(query)"
+            @keyup.enter="onInputChange"
           />
         </v-flex>
       </v-layout>
       <v-layout row justify-end>
-        <v-btn color="primary" small @click="onInputChange(query)">Go</v-btn>
-        <v-btn color="primary" small @click="updateByGps(gps)">My location</v-btn>
+        <v-btn color="primary" small @click="onInputChange">Go</v-btn>
+        <v-btn color="primary" small @click="someOn(gps)">My location</v-btn>
       </v-layout>
       <keep-alive>
         <component :is="currentComponent"></component>
@@ -45,11 +45,13 @@ export default {
   data: function() {
     return {
       query: "",
-      gps: "51.684183,-3.431481"
+      gps: "51.684183,-3.431481",
+      autofocus: true
     };
   },
   computed: {
     ...mapGetters({
+      listRRRRRRRR:types.SEARCH_LISTS,
       currentComponent: types.CURRENT_COMPONENT,
       searchLists: types.SEARCH_LISTS
     })
@@ -59,10 +61,7 @@ export default {
       updateData: types.UPDATE_SEARCH_LISTS,
       updateByGps: types.UPDATE_SEARCH_BY_GPS
     }),
-    clearInput() {
-      this.$refs.searchInput.value = "";
-    },
-    onInputChange(query) {
+    onInputChange() {
       if (this.query === "") {
         return;
       }
@@ -72,11 +71,16 @@ export default {
           el => getProperty(["locations"], el)[0].place_name === searchQuery
         )
       ) {
-        this.updateData(query);
+        this.updateData(this.query);
       } else {
         alert("YOU HAD ALREADY BEEN SEARCHING FOR THIS");
       }
-      this.clearInput();
+      this.query=''
+    },
+    
+    someOn(gps){
+      this.updateByGps(gps);
+      this.listRRRRRRRR
     },
     goToItemRoute() {
       this.$router.push({ name: "favorites" });

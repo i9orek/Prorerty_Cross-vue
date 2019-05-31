@@ -6,7 +6,8 @@ import {
   MISSPELLED_LOCATION,
   LISTINGS_OF_ONE_UNAMBIGUOUS_LOCATION,
   LISTINGS_OF_BEST_AMBIGUOUS_LOCATION,
-  LISTINGS_LARGE_LOCATION
+  LISTINGS_LARGE_LOCATION,
+  API_REQUEST_URL
 } from '../constants/constants';
 import axios from 'axios-jsonp-pro';
 
@@ -20,54 +21,53 @@ const toLocalStorage = (getterName, locStorageItemName) => {
   localStorage.setItem(locStorageItemName, itemValue);
 };
 
+const mutateSearchLists = (res, curCompName, getterName, commit, getters) => {
+  commit(types.MUTATE_UPDATE_SEARCH_LISTS, res)
+  commit(types.CURRENT_COMPONENT_NAME, curCompName);
+  toLocalStorage(getters[types.SEARCH_LISTS], getterName);
+}
+
 export default {
-  [types.UPDATE_SEARCH_LISTS]: ({
+  [types.UPDATE_SEARCH_LISTS]: async ({
     commit,
     getters
   }, payload) => {
-
-
-    axios.jsonp(
-        `https://api.nestoria.co.uk/api?encoding=json&pretty=1&action=search_listings&place_name=${payload}`
-      )
-      .then(({
-        response
-      }) => {
-        const list = setIdToList(response);
-        const code = response.application_response_code;
-        if (code === AMBIGUOUS_LOCATION || code === MISSPELLED_LOCATION) {
-          commit(types.MUTATE_UPDATE_LOCATION_BELOW, response);
-          commit(types.CURRENT_COMPONENT_NAME, 'location-list');
-        } else if (code === LISTINGS_OF_ONE_UNAMBIGUOUS_LOCATION || code ===
-          LISTINGS_OF_BEST_AMBIGUOUS_LOCATION || code === LISTINGS_LARGE_LOCATION) {
-          commit(types.MUTATE_UPDATE_SEARCH_LISTS, response);
-          commit(types.CURRENT_COMPONENT_NAME, 'search-lists');
-          toLocalStorage(getters[types.SEARCH_LISTS], 'searchLists');
-        } else {
-          commit(types.CURRENT_COMPONENT_NAME, 'error-page');
-          commit(types.CURRENT_REQUEST_ERROR, response.errors);
-        }
-      })
-      .catch(function (error) {
-        console.log('SOME WENT WRONG');
-      });
+    try {
+      const data = await axios.jsonp(
+        `${API_REQUEST_URL}&place_name=${payload}`
+      );
+      const response = data.response;
+      const code = response.application_response_code;
+      setIdToList(response);
+      if (code === AMBIGUOUS_LOCATION || code === MISSPELLED_LOCATION) {
+        commit(types.MUTATE_UPDATE_LOCATION_BELOW, response);
+        commit(types.CURRENT_COMPONENT_NAME, 'location-list');
+      } else if (code === LISTINGS_OF_ONE_UNAMBIGUOUS_LOCATION || code ===
+        LISTINGS_OF_BEST_AMBIGUOUS_LOCATION || code === LISTINGS_LARGE_LOCATION) {
+        mutateSearchLists(response, 'search-lists', 'searchLists', commit, getters);
+      } else {
+        commit(types.CURRENT_COMPONENT_NAME, 'error-page');
+        commit(types.CURRENT_REQUEST_ERROR, response);
+      }
+    } catch (e) {
+      alert(e)
+    }
   },
 
-  [types.UPDATE_SEARCH_BY_GPS]: ({
+  [types.UPDATE_SEARCH_BY_GPS]: async ({
     commit,
     getters
   }, payload) => {
-    axios.jsonp(
-        `https://api.nestoria.co.uk/api?encoding=json&pretty=1&action=search_listings&centre_point=${payload}`
-      )
-      .then(({
-        response
-      }) => {
-        const list = setIdToList(response);
-        commit(types.MUTATE_UPDATE_SEARCH_LISTS, response);
-        commit(types.CURRENT_COMPONENT_NAME, 'search-lists');
-        toLocalStorage(getters[types.SEARCH_LISTS], 'searchLists');
-      })
+    try {
+      const data = await axios.jsonp(
+        `${API_REQUEST_URL}&centre_point=${payload}`
+      );
+      const response = data.response;
+      setIdToList(response);
+      mutateSearchLists(response, 'search-lists', 'searchLists', commit, getters);
+    } catch (e) {
+      alert(e)
+    }
   },
   [types.UPDATE_CHOSEN_SEARCH_LIST]: ({
     commit
@@ -79,6 +79,7 @@ export default {
   }, payload) => {
     const list = setIdToList(payload);
     commit(types.MUTATE_CHOSEN_LOCATION, payload);
+    
   },
   [types.UPDATE_FAVORITES]: ({
     commit,
