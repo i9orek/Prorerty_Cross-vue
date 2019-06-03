@@ -11,18 +11,20 @@
         >“Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!”</div>
         <v-flex>
           <v-text-field
-            autofocus=autofocus
+            autofocus="autofocus"
             dark
             ref="searchInput"
             type="text"
             v-model="query"
             @keyup.enter="onInputChange"
+            @input="sameSearchToggle"
           />
         </v-flex>
       </v-layout>
+        <v-alert v-if="sameSearch" :value="true" color="white" icon="info" outline>"YOU HAD ALREADY BEEN SEARCHING FOR THIS"</v-alert>
       <v-layout row justify-end>
         <v-btn color="primary" small @click="onInputChange">Go</v-btn>
-        <v-btn color="primary" small @click="someOn(gps)">My location</v-btn>
+        <v-btn color="primary" small @click="myGpsSearch(gps)">My location</v-btn>
       </v-layout>
       <keep-alive>
         <component :is="currentComponent"></component>
@@ -46,12 +48,12 @@ export default {
     return {
       query: "",
       gps: "51.684183,-3.431481",
-      autofocus: true
+      // autofocus: true,
+      sameSearch:false
     };
   },
   computed: {
     ...mapGetters({
-      listRRRRRRRR:types.SEARCH_LISTS,
       currentComponent: types.CURRENT_COMPONENT,
       searchLists: types.SEARCH_LISTS
     })
@@ -65,7 +67,7 @@ export default {
       if (this.query === "") {
         return;
       }
-      let searchQuery = this.query.toLowerCase();
+      const searchQuery = this.query.toLowerCase();
       if (
         !this.searchLists.some(
           el => getProperty(["locations"], el)[0].place_name === searchQuery
@@ -73,17 +75,19 @@ export default {
       ) {
         this.updateData(this.query);
       } else {
-        alert("YOU HAD ALREADY BEEN SEARCHING FOR THIS");
+        this.sameSearch = true;
       }
-      this.query=''
+      this.query = "";
     },
-    
-    someOn(gps){
+    myGpsSearch(gps) {
       this.updateByGps(gps);
-      this.listRRRRRRRR
+      this.sameSearch = false;
     },
     goToItemRoute() {
       this.$router.push({ name: "favorites" });
+    },
+    sameSearchToggle(){
+      this.sameSearch = false;
     }
   },
   components: {

@@ -17,7 +17,7 @@ import { mapState } from "vuex";
 export default {
   data: function() {
     return {
-      showError: false
+      toggleError: false
     };
   },
   computed: {
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     showOrHideError() {
-      this.showError = this.showError ? false : true;
+      !this.toggleError ? true : false;
     }
   }
 };

@@ -1,17 +1,6 @@
 <template>
   <div>
-    <v-layout class="mt-2">
-      <v-flex md10 xs10 lg10  >
-        <v-btn icon @click="$router.go(-1)">
-          <v-icon large color="white">arrow_back</v-icon>
-        </v-btn>
-      </v-flex>
-      <v-flex md12 xs12 lg12  class="my_home">
-        <v-btn icon to="/">
-          <v-icon large color="white">home</v-icon>
-        </v-btn>
-      </v-flex>
-    </v-layout>
+    <my-menu></my-menu>
     <v-container class="pt-1">
       <v-layout row nowrap>
         <h1 class="mb-1">Property details</h1>
@@ -32,10 +21,10 @@
                 <div>{{location.summary}}</div>
               </v-card-text>
               <v-card-actions class="mb-3 mr-3">
-                <v-btn icon class="mt-2" v-if="typeOfBtn" @click="pushToFavorites(location)">
+                <v-btn icon class="mt-2" :class="addBtn" @click="pushToFavorites(location)">
                   <v-icon x-large>favorite</v-icon>
                 </v-btn>
-                <v-btn icon class="mt-2" v-else @click="removeFromFavorites(location)">
+                <v-btn icon class="mt-2" :class="deleteBtn" @click="removeFromFavorites(location)">
                   <v-icon x-large color="red">favorite</v-icon>
                 </v-btn>
               </v-card-actions>
@@ -48,6 +37,7 @@
 </template>
 
 <script>
+import Menu from "../components/Menu";
 import * as types from "../store/types";
 import { mapGetters, mapActions } from "vuex";
 import getProperty from "../utils/getProperty";
@@ -64,6 +54,12 @@ export default {
       return !this.favorites.some(
         ({ title }) => title == getProperty(["title"], this.location)
       );
+    },
+    addBtn() {
+      return this.typeOfBtn ? { showBtn: true } : { hideBtn: true };
+    },
+    deleteBtn() {
+      return this.typeOfBtn ? { hideBtn: true } : { showBtn: true };
     }
   },
   methods: {
@@ -82,7 +78,19 @@ export default {
     },
     removeFromFavorites(location) {
       this.deleteFromFavorites(this.filteredFavorites(location));
-    },
+    }
+  },
+  components: {
+    "my-menu": Menu
   }
 };
 </script>
+
+<style>
+.hideBtn {
+  display: none;
+}
+.showBtn {
+  display: block;
+}
+</style>

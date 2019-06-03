@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import Menu from './Menu';
 import { mapGetters, mapActions } from "vuex";
 import * as types from "../store/types";
 
@@ -33,6 +34,6 @@ export default {
       this.$router.push({ name: "list", params: { id: el.listId } });
       this.chosenSearchList(el);
     }
-  }
+  },
 };
 </script>

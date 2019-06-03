@@ -33,10 +33,9 @@ export default {
     getters
   }, payload) => {
     try {
-      const data = await axios.jsonp(
+      const {response} = await axios.jsonp(
         `${API_REQUEST_URL}&place_name=${payload}`
       );
-      const response = data.response;
       const code = response.application_response_code;
       setIdToList(response);
       if (code === AMBIGUOUS_LOCATION || code === MISSPELLED_LOCATION) {
@@ -59,10 +58,9 @@ export default {
     getters
   }, payload) => {
     try {
-      const data = await axios.jsonp(
+      const {response} = await axios.jsonp(
         `${API_REQUEST_URL}&centre_point=${payload}`
       );
-      const response = data.response;
       setIdToList(response);
       mutateSearchLists(response, 'search-lists', 'searchLists', commit, getters);
     } catch (e) {
@@ -77,7 +75,7 @@ export default {
   [types.SET_CHOSEN_LOCATION]: ({
     commit
   }, payload) => {
-    const list = setIdToList(payload);
+    setIdToList(payload);
     commit(types.MUTATE_CHOSEN_LOCATION, payload);
     
   },
